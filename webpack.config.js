@@ -2,8 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
-console.log('idDevvv', isDev);
-// const isDev = process.evn.NODE_ENV === 'development';
+
 const jsLoaders = () => {
   const loaders = [{
     loader: 'babel-loader',
