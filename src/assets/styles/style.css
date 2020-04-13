@@ -31,13 +31,13 @@ body {
 }
 
 .burger span {
-  background-color: gray;
+  background-color: #383127;
   display: block;
   width: 30px;
   height: 4px;
   margin-bottom: 4px;
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   -webkit-transform-origin: left;
           transform-origin: left;
 }
@@ -47,7 +47,7 @@ body {
 }
 
 .burger:hover span {
-  background-color: #a7a5a5;
+  background-color: #7e6c53;
 }
 
 .burger_active span:nth-child(2) {
@@ -139,8 +139,8 @@ body {
 }
 
 .side-menu {
-  -webkit-transition: 200ms linear;
-  transition: 200ms linear;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   position: absolute;
   top: 0;
   z-index: -1;
@@ -157,8 +157,49 @@ body {
 }
 
 .side-menu_active {
-  -webkit-transition: 200ms linear;
-  transition: 200ms linear;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   left: 0;
+}
+
+.side-menu__links {
+  width: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 140px 0 0 120px;
+}
+
+.link {
+  font-size: 3rem;
+  color: #E4DBBF;
+  padding-bottom: 15px;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #383127;
+}
+
+.link_active {
+  text-decoration: underline;
+  color: #383127;
+}
+
+.main-page {
+  width: 100%;
+  height: auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+}
+
+.topic-card {
+  height: 200px;
 }
 /*# sourceMappingURL=style.css.map */
