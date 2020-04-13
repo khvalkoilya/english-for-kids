@@ -10,7 +10,7 @@ body {
 }
 
 .wrapper {
-    max-width: 1020px;
+    max-width: 1400px;
     width: 100%;
     margin: 0 auto;
     height: auto;
@@ -19,6 +19,8 @@ body {
 }
 
 .header {
+    position: relative;
+    z-index: 3;
     padding-top: 30px;
     padding-bottom: 30px;
     display: flex;
@@ -46,11 +48,11 @@ body {
             opacity: 0;
         }
         span:first-child {
-            margin-bottom: 10px;
+            width: 22px;
             transform: rotate(45deg);
         }
         span:last-child {
-            margin-bottom: 10px;
+            width: 22px;
             transform: rotate(-45deg);
         }
     }
@@ -123,13 +125,13 @@ body {
     transition: 0.5s;
     position: absolute;
     top: 0;
-    z-index: -1;
+    z-index: 2;
     height: 100vh;
     width: 430px;
     left: -430px;
     background: linear-gradient(to bottom, #DC5B21, rgb(206, 156, 133));
     &_play {
-        background: linear-gradient(to bottom, #70AB8F, rgb(0, 255, 140));
+        background: linear-gradient(to bottom, #70AB8F, rgb(1, 138, 76));
     }
     &_active {
         transition: 0.5s;
@@ -161,12 +163,51 @@ body {
 }
 
 .main-page {
-    width: 100%;
     height: auto;
     display: grid;
+    gap: 30px;
     grid-template-columns: repeat(4, 1fr);
 }
 
 .topic-card {
-    height: 200px;
+    border-radius: 5px;
+    height: 260px;
+    background: linear-gradient(to bottom, #DC5B21, rgb(206, 156, 133) 40%, #fff 0%); 
+
+
+    &__image-block {
+        width: 150px;
+        margin: 0 auto;
+        margin-top: 16px;
+        height: 150px;
+        border: 10px solid #ffffff;
+        border-radius: 50%;
+        overflow: hidden;
+
+        &__image {
+            margin: 0px 0 0 -47px;
+            width: initial;
+            height: 100%;
+        }
+    }
+
+    &__name {
+        color: #383127;
+        font-size: 2.8rem;
+        padding-top: 10px;
+        text-align: center;
+    }
+
+    &:hover {
+        -webkit-box-shadow: 0px 11px 23px 7px rgba(0,0,0,0.31);
+        -moz-box-shadow: 0px 11px 23px 7px rgba(0,0,0,0.31);
+        box-shadow: 0px 11px 23px 7px rgba(0,0,0,0.31);
+        transform: scale(1.05);
+        transition: 0.3s;
+        z-index: 1;
+    }
+}
+
+.topic-card_play {
+    background: linear-gradient(to bottom, #70AB8F, rgb(1, 138, 76) 40%, #fff 0%); 
 }

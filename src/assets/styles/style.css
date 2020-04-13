@@ -10,7 +10,7 @@ body {
 }
 
 .wrapper {
-  max-width: 1020px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
   height: auto;
@@ -20,6 +20,8 @@ body {
 }
 
 .header {
+  position: relative;
+  z-index: 3;
   padding-top: 30px;
   padding-bottom: 30px;
   display: -webkit-box;
@@ -55,13 +57,13 @@ body {
 }
 
 .burger_active span:first-child {
-  margin-bottom: 10px;
+  width: 22px;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
 .burger_active span:last-child {
-  margin-bottom: 10px;
+  width: 22px;
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
@@ -143,7 +145,7 @@ body {
   transition: 0.5s;
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: 2;
   height: 100vh;
   width: 430px;
   left: -430px;
@@ -152,8 +154,8 @@ body {
 }
 
 .side-menu_play {
-  background: -webkit-gradient(linear, left top, left bottom, from(#70AB8F), to(#00ff8c));
-  background: linear-gradient(to bottom, #70AB8F, #00ff8c);
+  background: -webkit-gradient(linear, left top, left bottom, from(#70AB8F), to(#018a4c));
+  background: linear-gradient(to bottom, #70AB8F, #018a4c);
 }
 
 .side-menu_active {
@@ -191,15 +193,56 @@ body {
 }
 
 .main-page {
-  width: 100%;
   height: auto;
   display: -ms-grid;
   display: grid;
+  gap: 30px;
   -ms-grid-columns: (1fr)[4];
       grid-template-columns: repeat(4, 1fr);
 }
 
 .topic-card {
-  height: 200px;
+  border-radius: 5px;
+  height: 260px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#DC5B21), color-stop(40%, #ce9c85), color-stop(0%, #fff));
+  background: linear-gradient(to bottom, #DC5B21, #ce9c85 40%, #fff 0%);
+}
+
+.topic-card__image-block {
+  width: 150px;
+  margin: 0 auto;
+  margin-top: 16px;
+  height: 150px;
+  border: 10px solid #ffffff;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.topic-card__image-block__image {
+  margin: 0px 0 0 -47px;
+  width: initial;
+  height: 100%;
+}
+
+.topic-card__name {
+  color: #383127;
+  font-size: 2.8rem;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.topic-card:hover {
+  -webkit-box-shadow: 0px 11px 23px 7px rgba(0, 0, 0, 0.31);
+  box-shadow: 0px 11px 23px 7px rgba(0, 0, 0, 0.31);
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  z-index: 1;
+}
+
+.topic-card_play {
+  background: -webkit-gradient(linear, left top, left bottom, from(#70AB8F), color-stop(40%, #018a4c), color-stop(0%, #fff));
+  background: linear-gradient(to bottom, #70AB8F, #018a4c 40%, #fff 0%);
 }
 /*# sourceMappingURL=style.css.map */
