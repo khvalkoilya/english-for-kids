@@ -71,6 +71,7 @@ body {
 }
 
 .checkbox__text {
+    cursor: pointer;
     position: relative;
     font-size: 2.4rem;
     font-weight: 400;
@@ -97,6 +98,7 @@ body {
         background: rgb(221, 221, 221);
         box-shadow: inset 0 0 7px rgba(0,0,0,.3);
         transition: .2s;
+        
     }
 
     &.train:before {
@@ -205,6 +207,7 @@ body {
         transform: scale(1.05);
         transition: 0.3s;
         z-index: 1;
+        cursor: pointer;
     }
 }
 
