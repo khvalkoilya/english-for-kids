@@ -12,14 +12,14 @@
   "browserslist": "> 0.25%, not dead",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khvalkoilya/english-for-kids.git"
+    "url": "git+https://github.com/rolling-scopes-school/khvalkoilya-RS2020Q1.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/khvalkoilya/english-for-kids/issues"
+    "url": "https://github.com/rolling-scopes-school/khvalkoilya-RS2020Q1/issues"
   },
-  "homepage": "https://github.com/khvalkoilya/english-for-kids#readme",
+  "homepage": "https://github.com/rolling-scopes-school/khvalkoilya-RS2020Q1#readme",
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -43,3 +43,4 @@
     "@babel/polyfill": "^7.8.7"
   }
 }
+

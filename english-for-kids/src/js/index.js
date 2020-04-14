@@ -57,6 +57,6 @@ function mainPageBlock() {
         card.innerHTML += `<p class="topic-card__name">${item.name}</p>`;
         page.append(card);
     });
-    console.log(page)
+    console.log(page) 
     document.querySelector('main > .wrapper').append(page);
 };

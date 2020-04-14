@@ -2,11 +2,11 @@ const cards = [
   [ 
     {
         name: 'Animals',
-        image: 'assets/images/animals.jpg'
+        image: '/srcqassets/images/animals.jpg'
     },
     {
         name: 'Rooms',
-        image: 'assets/images/rooms.jpg'
+        image: '/src/assets/images/rooms.jpg'
     },
     {
         name: 'Actions',

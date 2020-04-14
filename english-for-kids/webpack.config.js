@@ -25,7 +25,7 @@ module.exports = {
   mode: 'development',
   entry: ['@babel/polyfill', './js/index.js'],
   output: {
-    filename: '[contenthash].bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
