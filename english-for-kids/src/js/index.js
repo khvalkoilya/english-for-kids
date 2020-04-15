@@ -87,13 +87,17 @@ class WordCards {
     console.log(this.obj);
     this.obj.forEach((item) => {
       const card = document.createElement('div');
-      const front = document.createElement('div');
-      const back = document.createElement('div');
-      front.className = 'word-card_front';
-      back.className = 'word-card_back';
-      // front.innerHTML = `<div class="word-card-front__image-block"><img class="topic-card__image-block__image" src="${item.image}"></img></div>`;
-      front.innerHTML += `<p class="topic-card__name">${item.name}</p>`;
-      back.innerHTML += 'LOOOOOL';
+      card.className = 'word-card';
+      const front = createFrontBack('word-card_front', item.name, item.image);
+      const back = createFrontBack('word-card_back', item.translation, item.image);
+      function createFrontBack(classN, text, img) {
+        let block = document.createElement('div');
+        block.className = classN;
+        block.innerHTML = `<div class="word-card__image-block"><img class="word-card__image-block__image" src="${img}"></img></div>`;
+        block.innerHTML += `<p class="word-card__name">${text}</p>`;
+        return block;
+      }
+      front.innerHTML += '<img class="word-card__refresh" alt="refresh" src="../src/assets/images/refresh.svg">'
       card.append(front);
       card.append(back);
       table.append(card);
@@ -106,4 +110,8 @@ function topicPageBlock(position) {
   document.querySelector('main > .wrapper').innerHTML = '';
   const objOfCards = new WordCards(cards[position + 1]);
   document.querySelector('main > .wrapper').append(objOfCards.createWordCard());
+  document.querySelector('.word-card__refresh').addEventListener('click', ()=>{
+    document.querySelector('.word-card').classList.add('rotate');
+  })
 }
+

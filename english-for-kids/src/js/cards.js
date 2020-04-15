@@ -35,9 +35,9 @@ const cards = [
   ],
   [
     {
-      name: 'Dog',
-      // image: ,
-      // translation: ,
+      name: 'dog',
+      image: '../src/assets/images/dog.jpg',
+      translation: 'собака',
       // audio:
     },
     {
