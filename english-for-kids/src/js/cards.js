@@ -1,43 +1,40 @@
 const cards = [
-  [ 
+  [
     {
-        name: 'Animals',
-        image: '/srcqassets/images/animals.jpg'
+      name: 'Animals',
+      image: '../src/assets/images/animals.jpg',
     },
     {
-        name: 'Rooms',
-        image: '/src/assets/images/rooms.jpg'
+      name: 'Rooms',
+      image: '../src/assets/images/rooms.jpg',
     },
     {
-        name: 'Actions',
-        image: 'assets/images/actions.jpg'
+      name: 'Actions',
+      image: '../src/assets/images/actions.jpg',
     },
     {
-        name: 'Vegetables',
-        image: 'assets/images/vegetables.jpg'
+      name: 'Vegetables',
+      image: '../src/assets/images/vegetables.jpg',
     },
     {
-        name: 'Fruits',
-        image: 'assets/images/fruits.jpg'
+      name: 'Fruits',
+      image: '../src/assets/images/fruits.jpg',
     },
     {
-        name: 'Colors',
-        image: 'assets/images/colors.jpg'
+      name: 'Colors',
+      image: '../src/assets/images/colors.jpg',
     },
     {
-        name: 'Decor',
-        image: 'assets/images/decor.jpg'
+      name: 'Decor',
+      image: '../src/assets/images/decor.jpg',
     },
     {
-        name: 'Food',
-        image: 'assets/images/food.jpg'
-    }
+      name: 'Food',
+      image: '../src/assets/images/food.jpg',
+    },
   ],
   [
     {
-        
-    },
-    {
 
     },
     {
@@ -57,8 +54,11 @@ const cards = [
     },
     {
 
-    }
-  ]
+    },
+    {
+
+    },
+  ],
 ];
 
 
