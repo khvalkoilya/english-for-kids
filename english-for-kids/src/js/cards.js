@@ -35,7 +35,39 @@ const cards = [
   ],
   [
     {
+      name: 'Dog',
+      // image: ,
+      // translation: ,
+      // audio:
+    },
+    {
 
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+  ],
+  [
+    {
+      name: 'Kitchen',
+      // image: ,
+      // translation: ,
+      // audio:
     },
     {
 

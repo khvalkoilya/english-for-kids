@@ -5,7 +5,6 @@ const checkbox = document.querySelector('.checkbox__input');
 const checkboxText = document.querySelector('.checkbox__text');
 let isTrain = true;
 let currentPage = 'Main Page';
-
 mainPageBlock();
 
 checkbox.addEventListener('change', () => {
@@ -36,14 +35,16 @@ document.querySelector('body').addEventListener('click', (e) => {
   }
 });
 
-document.querySelectorAll('.link').forEach((elem) => elem.addEventListener('click', () => {
+document.querySelectorAll('.link').forEach((elem) => elem.addEventListener('click', () => changeActiveLink(elem)));
+
+function changeActiveLink(elem) {
   document.querySelectorAll('.link').forEach((e) => e.classList.remove('link_active'));
   elem.classList.add('link_active');
   sideMenu();
   currentPage = elem.innerHTML;
   if (currentPage == 'Main Page') mainPageBlock();
   else findPositionOfTopicInLinks(currentPage);
-}));
+}
 
 function mainPageBlock() {
   document.querySelector('main > .wrapper').innerHTML = '';
@@ -56,27 +57,53 @@ function mainPageBlock() {
     card.innerHTML += `<p class="topic-card__name">${item.name}</p>`;
     page.append(card);
   });
-  console.log(page);
   document.querySelector('main > .wrapper').append(page);
+  if (!isTrain) document.querySelectorAll('.topic-card').forEach((item) => item.classList.toggle('topic-card_play'));
+  document.querySelectorAll('.topic-card').forEach((item) => item.addEventListener('click', () => findPositionOfTopicInMainPage(item)));
 }
 
 
-const topics = document.querySelectorAll('.topic-card');
-topics.forEach((item) => {
-  item.addEventListener('click', () => findPositionOfTopicInMainPage(item));
-});
-
-// document.querySelectorAll('.link').forEach((item) => item.addEventListener('click',findPositionOfTopicInLinks(item)));
-
 function findPositionOfTopicInMainPage(item) {
   const positionOfTopic = cards[0].indexOf(cards[0].find((obj) => obj.name === item.children[1].innerHTML));
-  console.log(positionOfTopic);
+  topicPageBlock(positionOfTopic);
 }
 
 function findPositionOfTopicInLinks(item) {
   const positionOfTopic = cards[0].indexOf(cards[0].find((obj) => obj.name === item));
-  console.log(positionOfTopic);
+  topicPageBlock(positionOfTopic);
 }
-function topicPageBlock(item) {
 
+class WordCards {
+  constructor(obj) {
+    this.obj = obj;
+  }
+
+  createWordCard() {
+    const page = document.createElement('section');
+    page.className = 'topic-page';
+    const table = document.createElement('div');
+    table.className = 'topic-page_table';
+    page.append(table);
+    console.log(this.obj);
+    this.obj.forEach((item) => {
+      const card = document.createElement('div');
+      const front = document.createElement('div');
+      const back = document.createElement('div');
+      front.className = 'word-card_front';
+      back.className = 'word-card_back';
+      // front.innerHTML = `<div class="word-card-front__image-block"><img class="topic-card__image-block__image" src="${item.image}"></img></div>`;
+      front.innerHTML += `<p class="topic-card__name">${item.name}</p>`;
+      back.innerHTML += 'LOOOOOL';
+      card.append(front);
+      card.append(back);
+      table.append(card);
+    });
+    return page;
+  }
+}
+
+function topicPageBlock(position) {
+  document.querySelector('main > .wrapper').innerHTML = '';
+  const objOfCards = new WordCards(cards[position + 1]);
+  document.querySelector('main > .wrapper').append(objOfCards.createWordCard());
 }

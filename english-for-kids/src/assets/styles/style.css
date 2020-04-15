@@ -193,7 +193,7 @@ body {
   color: #383127;
 }
 
-.main-page {
+.main-page, .topic-page_table {
   height: auto;
   display: -ms-grid;
   display: grid;
