@@ -9,15 +9,6 @@ body {
     padding: 0;
 }
 
-// .wrapper {
-//     max-width: 1440px;
-//     width: 100%;
-//     margin: 0 auto;
-//     height: auto;
-//     padding: 0 40px;
-//     box-sizing: border-box;
-// }
-
 .header {
     justify-content: center;
     position: relative;
@@ -28,7 +19,7 @@ body {
     justify-content: space-between;
 }
 
-.header, .rating {
+.header, .rating, .buttons {
     max-width: 1400px;
     @media (max-width: 1399px) {
         max-width: 1040px;
@@ -201,8 +192,7 @@ body {
     flex-wrap: wrap;
     max-width: 1440px;
     justify-content: center;
-
-
+    padding-bottom: 20px;
 }
 
 .word-card {
@@ -282,6 +272,11 @@ body {
 .none {
     display: none;
 }
+
+.topic-page {
+    padding-bottom: 20px;
+}
+
 .topic-card {
     margin: 20px 20px;
     width: 320px;
@@ -336,4 +331,18 @@ body {
     left: 50%;
     transform: translate(-50%);
     overflow: hidden;
+}
+
+.buttons {
+    width: 30%;
+    height: 70px;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #70AB8F, #018a4c);
+    margin: 0 auto;
+    &__start {
+        font-size: 3vw;
+        text-align: center;
+        padding-top: 7px;
+        color: #E4DBBF;
+    }
 }

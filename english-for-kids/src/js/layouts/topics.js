@@ -20,8 +20,8 @@ export default [
       image: '../src/assets/images/fruits.jpg',
     },
     {
-      name: 'Colors',
-      image: '../src/assets/images/colors.jpg',
+      name: 'Weather',
+      image: '../src/assets/images/weather.jpg',
     },
     {
       name: 'Decor',
