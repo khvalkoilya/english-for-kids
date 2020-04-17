@@ -1,5 +1,6 @@
 import list from './layouts/list.js';
 import create from './utils/create.js';
+import WordCards from './utils/wordCard.js'
 
 const checkbox = document.querySelector('.checkbox__input');
 const checkboxText = document.querySelector('.checkbox__text');
@@ -68,33 +69,8 @@ function findPositionOfTopicInMainPage(item) {
 }
 
 function findPositionOfTopicInLinks(item) {
-  const positionOfTopic = cards[0].indexOf(cards[0].find((obj) => obj.name === item));
+  const positionOfTopic = list.topics.indexOf(list.topics.find((obj) => obj.name === item));
   topicPageBlock(positionOfTopic);
-}
-
-class WordCards {
-  constructor(obj) {
-    this.obj = obj;
-  }
-
-  createWordCard() {
-    let cards=[];
-    this.obj.forEach((item) => {
-      const card = create('div', 'word-card', [
-        create('div','word-card_front',[
-          create('div','word-card__image-block',create('img', 'word-card__image-block__image',null,null,['src',item.image])),
-          create('p','word-card__name',item.name),
-          create('img','word-card__refresh',null,null,['src','../src/assets/images/refresh.svg'])
-        ]),
-        create('div','word-card_back', [
-          create('div','word-card__image-block',create('img', 'word-card__image-block__image',null,null,['src',item.image])),
-          create('p','word-card__name',item.translation),
-        ])
-      ]);
-      cards.push(card);
-    });
-    return cards;
-  }
 }
 
 function topicPageBlock(position) {
@@ -107,5 +83,3 @@ function topicPageBlock(position) {
 
   document.querySelectorAll('.word-card__refresh').forEach((item)=>item.addEventListener('click', () => item.parentElement.parentElement.classList.add('rotate')));
 }
-
-// document.querySelectorAll('.link').forEach((elem) => elem.addEventListener('click', () => changeActiveLink(elem)));

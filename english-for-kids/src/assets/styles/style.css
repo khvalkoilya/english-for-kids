@@ -286,7 +286,7 @@ body {
 }
 
 .word-card__image-block__image {
-  width: initial;
+  width: 100%;
   height: 100%;
 }
 
