@@ -8,7 +8,7 @@ export default class WordCards {
     createWordCard() {
       let cards=[];
       this.obj.forEach((item) => {
-        const card = create('div', 'word-card', [
+        const card = create('div','word-card__container',create('div', 'word-card', [
           create('div','word-card_front',[
             create('div','word-card__image-block',create('img', 'word-card__image-block__image',null,null,['src',item.image])),
             create('p','word-card__name',item.name),
@@ -18,7 +18,7 @@ export default class WordCards {
             create('div','word-card__image-block',create('img', 'word-card__image-block__image',null,null,['src',item.image])),
             create('p','word-card__name',item.translation),
           ])
-        ]);
+        ]));
         cards.push(card);
       });
       return cards;

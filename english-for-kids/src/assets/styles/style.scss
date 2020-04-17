@@ -195,13 +195,19 @@ body {
     padding-bottom: 20px;
 }
 
+.word-card__container {
+    perspective: 500px;
+}
+
 .word-card {
+    perspective: 500px;
+    border-radius: 5px;
     position: relative;
     margin: 20px 20px;
     width: 320px;
     height: 260px;
     transform-style: preserve-3d;
-    transition: 1s;
+    transition: 0.7s;
     &:hover {
         -webkit-box-shadow: 0px 11px 23px 7px rgba(0,0,0,0.31);
         -moz-box-shadow: 0px 11px 23px 7px rgba(0,0,0,0.31);
@@ -257,16 +263,15 @@ body {
         left: 277px;
         cursor: pointer;
         &:hover {
-            transform: rotateZ(360deg);
-            transition: 1s;
+            transform: rotateZ(180deg);
+            transition: 0.3s;
         }
     }
-
-
 }
 
+
 .rotate {
-    transform: rotateY(180deg);;
+    transform: rotateY(180deg);
 }
 
 .none {
@@ -334,11 +339,13 @@ body {
 }
 
 .buttons {
+    cursor: pointer;
     width: 30%;
     height: 70px;
     border-radius: 20px;
     background: linear-gradient(to bottom, #70AB8F, #018a4c);
     margin: 0 auto;
+    transition: 0.3s;
     &__start {
         font-size: 3vw;
         text-align: center;

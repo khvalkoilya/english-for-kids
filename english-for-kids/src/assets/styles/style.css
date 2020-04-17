@@ -249,15 +249,23 @@ body {
   padding-bottom: 20px;
 }
 
+.word-card__container {
+  -webkit-perspective: 500px;
+          perspective: 500px;
+}
+
 .word-card {
+  -webkit-perspective: 500px;
+          perspective: 500px;
+  border-radius: 5px;
   position: relative;
   margin: 20px 20px;
   width: 320px;
   height: 260px;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
 }
 
 .word-card:hover {
@@ -320,10 +328,10 @@ body {
 }
 
 .word-card__refresh:hover {
-  -webkit-transform: rotateZ(360deg);
-          transform: rotateZ(360deg);
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transform: rotateZ(180deg);
+          transform: rotateZ(180deg);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .rotate {
@@ -399,12 +407,15 @@ body {
 }
 
 .buttons {
+  cursor: pointer;
   width: 30%;
   height: 70px;
   border-radius: 20px;
   background: -webkit-gradient(linear, left top, left bottom, from(#70AB8F), to(#018a4c));
   background: linear-gradient(to bottom, #70AB8F, #018a4c);
   margin: 0 auto;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .buttons__start {

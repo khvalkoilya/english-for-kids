@@ -92,7 +92,11 @@ function topicPageBlock(position) {
   const arrayOfCards = objOfCards.createWordCard();
   const page = create('section', 'topic-page', [create('div', 'rating none'), create('div','topic-page__table',arrayOfCards), create('div', 'buttons none', create('p','buttons__start','Start game!')), create('audio', 'sound'), create('audio', 'effect')]);
   document.querySelector('main').append(page);
-  document.querySelectorAll('.word-card__refresh').forEach((item)=>item.addEventListener('click', () => item.parentElement.parentElement.classList.add('rotate')));
+  document.querySelectorAll('.word-card__refresh').forEach((item)=>item.addEventListener('click', () => {
+    let el = item.parentElement.parentElement;
+    el.classList.add('rotate');
+    el.addEventListener('mouseleave',()=>el.classList.remove('rotate'));
+  }));
   if(!isTrain) changeModeForTopic();
 }
 
