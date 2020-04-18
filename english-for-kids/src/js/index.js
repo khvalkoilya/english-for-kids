@@ -1,6 +1,6 @@
 import list from './layouts/list.js';
 import create from './utils/create.js';
-import WordCards from './utils/wordCard.js'
+import WordCards from './utils/wordCard.js';
 
 const checkbox = document.querySelector('.checkbox__input');
 const checkboxText = document.querySelector('.checkbox__text');
@@ -48,21 +48,21 @@ function changeActiveLink(elem) {
   elem.classList.add('link_active');
   sideMenu();
   currentPage = elem.innerHTML;
-  if (currentPage == 'Main Page') mainPageBlock();
+  if (currentPage === 'Main Page') mainPageBlock();
   else findPositionOfTopic(currentPage);
 }
 
 function mainPageBlock() {
   document.querySelector('main').innerHTML = '';
-  let cards = [];
+  const cardsArray = [];
   list.topics.forEach((item) => {
-    const topicCard = create('div','topic-card',[
-      create('div','topic-card__image-block',create('img','topic-card__image-block__image',null,null,['src',item.image])),
-      create('p', 'topic-card__name',item.name)
+    const card = create('div', 'topic-card', [
+      create('div', 'topic-card__image-block', create('img', 'topic-card__image-block__image', null, null, ['src', item.image])),
+      create('p', 'topic-card__name', item.name),
     ]);
-    cards.push(topicCard);
-  })
-  let section = create('section', 'main-page',cards,document.querySelector('main'));
+    cardsArray.push(card);
+  });
+  create('section', 'main-page', cardsArray, document.querySelector('main'));
   if (!isTrain) changeModeForMain();
   topicCard();
 }
@@ -72,10 +72,9 @@ function topicCard() {
   document.querySelectorAll('.topic-card').forEach((item) => item.addEventListener('click', () => {
     findPositionOfTopic(item.children[1].innerHTML);
     document.querySelectorAll('.link').forEach((e) => {
-      if(e.innerHTML!==item.children[1].innerHTML)
-        e.classList.remove('link_active');
+      if (e.innerHTML !== item.children[1].innerHTML) e.classList.remove('link_active');
       else e.classList.add('link_active');
-      });
+    });
   }));
 }
 
@@ -90,20 +89,20 @@ function topicPageBlock(position) {
   document.querySelector('main').innerHTML = '';
   const objOfCards = new WordCards(list.cards[position]);
   const arrayOfCards = objOfCards.createWordCard();
-  const page = create('section', 'topic-page', [create('div', 'rating none'), create('div','topic-page__table',arrayOfCards), create('div', 'buttons none', create('p','buttons__start','Start game!')), create('audio', 'effect')]);
+  const page = create('section', 'topic-page', [create('div', 'rating none'), create('div', 'topic-page__table', arrayOfCards), create('div', 'buttons none', create('p', 'buttons__start', 'Start game!')), create('audio', 'effect')]);
   document.querySelector('main').append(page);
-  document.querySelectorAll('.word-card__refresh').forEach((item)=>item.addEventListener('click', () => {
-    let el = item.parentElement.parentElement;
+  document.querySelectorAll('.word-card__refresh').forEach((item) => item.addEventListener('click', () => {
+    const el = item.parentElement.parentElement;
     el.classList.add('rotate');
-    el.addEventListener('mouseleave',()=>el.classList.remove('rotate'));
+    el.addEventListener('mouseleave', () => el.classList.remove('rotate'));
   }));
-  document.querySelectorAll('.word-card_front').forEach((item)=>item.addEventListener('click', (e) => {
-    if(e.target.className!=='word-card__refresh' && isTrain) {
-      let audio = item.parentElement.lastElementChild
+  document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', (e) => {
+    if (e.target.className !== 'word-card__refresh' && isTrain) {
+      const audio = item.parentElement.lastElementChild;
       audio.play();
     }
-  }))
-  if(!isTrain) changeModeForTopic();
+  }));
+  if (!isTrain) changeModeForTopic();
 }
 
 function changeModeForTopic() {
@@ -112,7 +111,7 @@ function changeModeForTopic() {
   replacer('.word-card__name', 'none');
   replacer('.word-card__refresh', 'none');
   replacer('.rating', 'none');
-  replacer('.buttons', 'none')
+  replacer('.buttons', 'none');
   function replacer(what, how) {
     document.querySelectorAll(what).forEach((item) => item.classList.toggle(how));
   }

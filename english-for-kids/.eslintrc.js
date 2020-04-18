@@ -21,6 +21,7 @@ module.exports = {
   },
   rules: {
     "linebreak-style": 0,
-    "no-console": "off",
+    "no-use-before-define": ["error", { "functions": false, }],
+    "import/extensions": ["error", "always", {ignorePackages: true}]
   },
 };

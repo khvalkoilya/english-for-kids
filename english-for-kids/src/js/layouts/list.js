@@ -1,4 +1,4 @@
-import topics from './topics.js'
-import cards from './cards.js'
+import topics from './topics.js';
+import cards from './cards.js';
 
-export default { topics, cards }
+export default { topics, cards };
