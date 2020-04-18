@@ -169,9 +169,26 @@ function shuffle(array) {
 
 function gameResultsPage(number) {
   setTimeout(function(){
+    document.querySelector('.header').classList.add('none');
     document.querySelector('main').innerHTML = '';
-    create('section', 'mistakes', String(number), document.querySelector('main'));
+    let image = create('div', 'result');
+    let text;
+    let result;
+    let audio;
+    if(number === 0) {
+      audio = new Audio('../src/assets/sounds/win.mp3');
+      text = create('p','text_win', 'Congratulations! You win!');
+      result = create('img', 'result_win', null, image,['src','../src/assets/images/happy.svg']);
+    }
+    else {
+      audio = new Audio('../src/assets/sounds/lose.mp3');
+      text = create('p','text_lose', `You have ${number} mistakes :(`);
+      result = create('img', 'result_lose', null, image,['src','../src/assets/images/angry.svg']);
+    }
+    audio.play();
+    create('section', 'mistakes', [text,image], document.querySelector('main'));
     setTimeout(function(){
+      document.querySelector('.header').classList.remove('none');
       mainPageBlock();
     }, 3000);
   }, 1000);
