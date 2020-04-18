@@ -2,6 +2,7 @@ html {
     font-size: 10px;
     font-family: 'Roboto', 'Helvetica', sans-serif;
     background-color: #E4DBBF;
+    overflow-x:  hidden;
 }
 
 body {
@@ -340,16 +341,37 @@ body {
 
 .buttons {
     cursor: pointer;
-    width: 30%;
+    width: 40%;
     height: 70px;
     border-radius: 20px;
+    font-size: 2.6rem;
     background: linear-gradient(to bottom, #70AB8F, #018a4c);
     margin: 0 auto;
     transition: 0.3s;
     &__start {
-        font-size: 3vw;
         text-align: center;
-        padding-top: 7px;
+        padding-top: 18px;
         color: #E4DBBF;
+        @media (max-width: 360px) {
+            padding-top: 8px;
+        }
     }
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.repeat {
+    width: 70px;
+    border-radius: 50%;
+    transition: 0.3s;
+    font-size: 0;
+    background-image: url("../images/repeat.svg"),linear-gradient(to bottom, #70AB8F, #018a4c);
+    background-size: 45px 45px, cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.mistakes {
+    font-size: 10rem;
 }

@@ -116,13 +116,33 @@ function changeModeForTopic() {
   function replacer(what, how) {
     document.querySelectorAll(what).forEach((item) => item.classList.toggle(how));
   }
-  if (!isTrain) {
-    playMode();
+  document.querySelector('.buttons').classList.remove('repeat');
+  if(!isTrain){
+    document.querySelector('.buttons').addEventListener('click', () => {
+      if(document.querySelector('.buttons').classList.length === 1)
+        playMode();
+    })
   }
 }
 
 function playMode() {
-  let sounds = shuffle(Array.from(document.querySelectorAll('.sound')));
+  console.log("playmode")
+  document.querySelector('.buttons').classList.add('repeat');
+  let wordCards = shuffle(Array.from(document.querySelectorAll('.word-card')));
+  let positive = 0;
+  let mistakes = 0;
+  wordCards[positive].lastElementChild.play();
+  document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', ()=>audioFunction(item)));
+  function audioFunction(item) {
+    if(positive<8){
+      if(item === wordCards[positive].firstElementChild) {
+        positive++;
+        if(positive<8) wordCards[positive].lastElementChild.play();
+        else gameResultsPage(mistakes);
+      }
+      else mistakes++;
+    }
+  }
 }
 
 function shuffle(array) {
@@ -131,4 +151,12 @@ function shuffle(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+}
+
+
+function gameResultsPage(number) {
+  setTimeout(function(){
+  document.querySelector('main').innerHTML = '';
+  create('section', 'mistakes', String(number), document.querySelector('main'));
+  }, 1000)
 }
