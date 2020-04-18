@@ -17,7 +17,8 @@ export default class WordCards {
           create('div','word-card_back', [
             create('div','word-card__image-block',create('img', 'word-card__image-block__image',null,null,['src',item.image])),
             create('p','word-card__name',item.translation),
-          ])
+          ]),
+          create('audio','sound',null,null,['src',item.audio]),
         ]));
         cards.push(card);
       });
