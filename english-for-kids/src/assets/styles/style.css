@@ -414,6 +414,12 @@ body {
   text-align: right;
 }
 
+@media (max-width: 360px) {
+  .rating {
+    max-width: 250px;
+  }
+}
+
 .buttons {
   cursor: pointer;
   width: 40%;
@@ -435,7 +441,7 @@ body {
 
 @media (max-width: 360px) {
   .buttons__start {
-    padding-top: 8px;
+    padding-top: 4px;
   }
 }
 
@@ -475,6 +481,12 @@ body {
 .star__image {
   width: 35px;
   height: 35px;
+}
+
+@media (max-width: 360px) {
+  .star {
+    margin-right: 6px;
+  }
 }
 
 .text_win, .text_lose {

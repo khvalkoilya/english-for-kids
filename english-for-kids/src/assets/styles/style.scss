@@ -340,6 +340,9 @@ body {
     transform: translate(-50%);
     overflow: hidden;
     text-align: right;
+    @media (max-width: 360px) {
+        max-width: 250px;
+    }
 }
 
 .buttons {
@@ -356,7 +359,7 @@ body {
         padding-top: 18px;
         color: #E4DBBF;
         @media (max-width: 360px) {
-            padding-top: 8px;
+            padding-top: 4px;
         }
     }
     &:hover {
@@ -391,6 +394,9 @@ body {
     &__image {
         width: 35px;
         height: 35px;
+    }
+    @media(max-width: 360px) {
+        margin-right: 6px;
     }
 }
 
