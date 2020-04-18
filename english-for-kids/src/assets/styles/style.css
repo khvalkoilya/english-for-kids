@@ -405,6 +405,7 @@ body {
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
   overflow: hidden;
+  text-align: right;
 }
 
 .buttons {
@@ -452,5 +453,20 @@ body {
 
 .mistakes {
   font-size: 10rem;
+}
+
+.chosen-card {
+  opacity: 0.3;
+}
+
+.star {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+
+.star__image {
+  width: 35px;
+  height: 35px;
 }
 /*# sourceMappingURL=style.css.map */

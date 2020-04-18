@@ -131,18 +131,31 @@ function playMode() {
   let wordCards = shuffle(Array.from(document.querySelectorAll('.word-card')));
   let positive = 0;
   let mistakes = 0;
+  let goodStart = create('div', 'good-star');
+  let badStar = create('div', 'bad-star');
   wordCards[positive].lastElementChild.play();
+  document.querySelector('.repeat').addEventListener('click', ()=>wordCards[positive].lastElementChild.play())
   document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', ()=>audioFunction(item)));
   function audioFunction(item) {
     if(positive<8){
       if(item === wordCards[positive].firstElementChild) {
+        item.classList.add('chosen-card')
         positive++;
-        if(positive<8) wordCards[positive].lastElementChild.play();
+        let goodAnswer = new Audio('../src/assets/sounds/good.mp3');
+        goodAnswer.play();
+        document.querySelector('.rating').append(create('div','star', create('img','star__image',null,null,['src','../src/assets/images/good-star.svg'])))
+        if(positive<8) setTimeout(function() { wordCards[positive].lastElementChild.play() }, 300);
         else gameResultsPage(mistakes);
       }
-      else mistakes++;
+      else if(!item.classList.contains('chosen-card')) {
+        let badAnswer = new Audio('../src/assets/sounds/bad.mp3');
+        badAnswer.play();
+        document.querySelector('.rating').append(create('div','star', create('img','star__image',null,null,['src','../src/assets/images/bad-star.svg'])))
+        mistakes++;
+      }
     }
   }
+  document.querySelector('.repeat').addEventListener('click', ()=>wordCards[positive].lastElementChild.play())
 }
 
 function shuffle(array) {
@@ -156,7 +169,10 @@ function shuffle(array) {
 
 function gameResultsPage(number) {
   setTimeout(function(){
-  document.querySelector('main').innerHTML = '';
-  create('section', 'mistakes', String(number), document.querySelector('main'));
-  }, 1000)
+    document.querySelector('main').innerHTML = '';
+    create('section', 'mistakes', String(number), document.querySelector('main'));
+    setTimeout(function(){
+      mainPageBlock();
+    }, 3000);
+  }, 1000);
 }

@@ -337,6 +337,7 @@ body {
     left: 50%;
     transform: translate(-50%);
     overflow: hidden;
+    text-align: right;
 }
 
 .buttons {
@@ -374,4 +375,18 @@ body {
 
 .mistakes {
     font-size: 10rem;
+}
+
+.chosen-card {
+    opacity: 0.3;
+}
+
+.star {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    &__image {
+        width: 35px;
+        height: 35px;
+    }
 }
