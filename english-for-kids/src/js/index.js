@@ -98,11 +98,12 @@ function topicPageBlock(position) {
   }));
   document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', (e) => {
     if (e.target.className !== 'word-card__refresh' && isTrain) {
-      const audio = item.parentElement.lastElementChild;
-      audio.play();
+      item.parentElement.lastElementChild.play();
     }
   }));
-  if (!isTrain) changeModeForTopic();
+  if (!isTrain) {
+    changeModeForTopic();
+  }
 }
 
 function changeModeForTopic() {
@@ -115,10 +116,19 @@ function changeModeForTopic() {
   function replacer(what, how) {
     document.querySelectorAll(what).forEach((item) => item.classList.toggle(how));
   }
-
-  playMode();
+  if (!isTrain) {
+    playMode();
+  }
 }
 
 function playMode() {
+  let sounds = shuffle(Array.from(document.querySelectorAll('.sound')));
+}
 
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
