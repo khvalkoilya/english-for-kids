@@ -117,77 +117,71 @@ function changeModeForTopic() {
     document.querySelectorAll(what).forEach((item) => item.classList.toggle(how));
   }
   document.querySelector('.buttons').classList.remove('repeat');
-  if(!isTrain){
+  if (!isTrain) {
     document.querySelector('.buttons').addEventListener('click', () => {
-      if(document.querySelector('.buttons').classList.length === 1)
-        playMode();
-    })
+      if (document.querySelector('.buttons').classList.length === 1) playMode();
+    });
   }
 }
 
 function playMode() {
-  console.log("playmode")
   document.querySelector('.buttons').classList.add('repeat');
-  let wordCards = shuffle(Array.from(document.querySelectorAll('.word-card')));
+  const wordCards = shuffle(Array.from(document.querySelectorAll('.word-card')));
   let positive = 0;
   let mistakes = 0;
-  let goodStart = create('div', 'good-star');
-  let badStar = create('div', 'bad-star');
   wordCards[positive].lastElementChild.play();
-  document.querySelector('.repeat').addEventListener('click', ()=>wordCards[positive].lastElementChild.play())
-  document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', ()=>audioFunction(item)));
+  document.querySelector('.repeat').addEventListener('click', () => wordCards[positive].lastElementChild.play());
+  document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', () => audioFunction(item)));
   function audioFunction(item) {
-    if(positive<8){
-      if(item === wordCards[positive].firstElementChild) {
-        item.classList.add('chosen-card')
-        positive++;
-        let goodAnswer = new Audio('../src/assets/sounds/good.mp3');
+    if (positive < 8) {
+      if (item === wordCards[positive].firstElementChild) {
+        item.classList.add('chosen-card');
+        positive += 1;
+        const goodAnswer = new Audio('../src/assets/sounds/good.mp3');
         goodAnswer.play();
-        document.querySelector('.rating').append(create('div','star', create('img','star__image',null,null,['src','../src/assets/images/good-star.svg'])))
-        if(positive<8) setTimeout(function() { wordCards[positive].lastElementChild.play() }, 300);
+        document.querySelector('.rating').append(create('div', 'star', create('img', 'star__image', null, null, ['src', '../src/assets/images/good-star.svg'])));
+        if (positive < 8) setTimeout(() => { wordCards[positive].lastElementChild.play(); }, 300);
         else gameResultsPage(mistakes);
-      }
-      else if(!item.classList.contains('chosen-card')) {
-        let badAnswer = new Audio('../src/assets/sounds/bad.mp3');
+      } else if (!item.classList.contains('chosen-card')) {
+        const badAnswer = new Audio('../src/assets/sounds/bad.mp3');
         badAnswer.play();
-        document.querySelector('.rating').append(create('div','star', create('img','star__image',null,null,['src','../src/assets/images/bad-star.svg'])))
-        mistakes++;
+        document.querySelector('.rating').append(create('div', 'star', create('img', 'star__image', null, null, ['src', '../src/assets/images/bad-star.svg'])));
+        mistakes += 1;
       }
     }
   }
-  document.querySelector('.repeat').addEventListener('click', ()=>wordCards[positive].lastElementChild.play())
+  document.querySelector('.repeat').addEventListener('click', () => wordCards[positive].lastElementChild.play());
 }
 
 function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+  const arr = array;
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-  return array;
+  return arr;
 }
 
 
 function gameResultsPage(number) {
-  setTimeout(function(){
+  setTimeout(() => {
     document.querySelector('.header').classList.add('none');
     document.querySelector('main').innerHTML = '';
     let image = create('div', 'result');
     let text;
-    let result;
     let audio;
-    if(number === 0) {
+    if (number === 0) {
       audio = new Audio('../src/assets/sounds/win.mp3');
-      text = create('p','text_win', 'Congratulations! You win!');
-      result = create('img', 'result_win', null, image,['src','../src/assets/images/happy.svg']);
-    }
-    else {
+      text = create('p', 'text_win', 'Congratulations! You win!');
+      image = create('div', 'result', create('img', 'result_win', null, null, ['src', '../src/assets/images/happy.svg']));
+    } else {
       audio = new Audio('../src/assets/sounds/lose.mp3');
-      text = create('p','text_lose', `You have ${number} mistakes :(`);
-      result = create('img', 'result_lose', null, image,['src','../src/assets/images/angry.svg']);
+      text = create('p', 'text_lose', `You have ${number} mistakes :(`);
+      image = create('div', 'result', create('img', 'result_lose', null, null, ['src', '../src/assets/images/angry.svg']));
     }
     audio.play();
-    create('section', 'mistakes', [text,image], document.querySelector('main'));
-    setTimeout(function(){
+    create('section', 'mistakes', [text, image], document.querySelector('main'));
+    setTimeout(() => {
       document.querySelector('.header').classList.remove('none');
       mainPageBlock();
     }, 3000);
