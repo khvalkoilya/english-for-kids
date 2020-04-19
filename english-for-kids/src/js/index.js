@@ -1,3 +1,9 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+
+
 import '../assets/styles/reset.css';
 import '../assets/styles/style.css';
 
@@ -248,8 +254,8 @@ function statisticsSort(arr, name, rever, repeat) {
   else if (name === 'True') p = 5;
   else if (name === 'False') p = 6;
   else p = 7;
-  for (let i = 0; i < arr.length - 1; i++) {
-    for (let j = 0; j < arr.length - 1 - i; j++) {
+  for (let i = 0; i < arr.length - 1; i += 1) {
+    for (let j = 0; j < arr.length - 1 - i; j += 1) {
       if (arr[j][p] > arr[j + 1][p]) {
         const swap = arr[j];
         arr[j] = arr[j + 1];
@@ -268,7 +274,7 @@ function createTable(hugeArray, table) {
     const childs = [create('td', null, item[0]), create('td', null, item[1]), create('td', null, item[2]),
       create('td', null, String(item[3])), create('td', null, String(item[4])), create('td', null, String(item[5])),
       create('td', null, String(item[6])), create('td', null, String(item[7]))];
-    const row = create('tr', null, childs, table);
+    create('tr', null, childs, table);
   });
   return table;
 }

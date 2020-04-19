@@ -23,5 +23,6 @@ module.exports = {
     "linebreak-style": 0,
     "no-use-before-define": ["error", { "functions": false, }],
     "import/extensions": ["error", "always", {ignorePackages: true}],
+    "no-param-reassign": 0,
   },
 };
