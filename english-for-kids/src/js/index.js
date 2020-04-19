@@ -1,3 +1,6 @@
+// import '../assets/styles/reset.css';
+// import '../assets/styles/style.css';
+
 import list from './layouts/list.js';
 import create from './utils/create.js';
 import WordCards from './utils/wordCard.js';
@@ -5,6 +8,7 @@ import WordCards from './utils/wordCard.js';
 const checkbox = document.querySelector('.checkbox__input');
 const checkboxText = document.querySelector('.checkbox__text');
 let isTrain = true;
+const stata = localStorage['english'] || createLocal();
 let currentPage = 'Main Page';
 mainPageBlock();
 
@@ -49,6 +53,7 @@ function changeActiveLink(elem) {
   sideMenu();
   currentPage = elem.innerHTML;
   if (currentPage === 'Main Page') mainPageBlock();
+  else if(currentPage === 'Statistics') statisticsPage();
   else findPositionOfTopic(currentPage);
 }
 
@@ -89,7 +94,7 @@ function topicPageBlock(position) {
   document.querySelector('main').innerHTML = '';
   const objOfCards = new WordCards(list.cards[position]);
   const arrayOfCards = objOfCards.createWordCard();
-  const page = create('section', 'topic-page', [create('div', 'rating none'), create('div', 'topic-page__table', arrayOfCards), create('div', 'buttons none', create('p', 'buttons__start', 'Start game!')), create('audio', 'effect')]);
+  const page = create('section', 'topic-page', [create('div', 'rating none'), create('div', 'topic-page__table', arrayOfCards), create('div', 'buttons none', create('p', 'buttons__start', 'Start game!'))]);
   document.querySelector('main').append(page);
   document.querySelectorAll('.word-card__refresh').forEach((item) => item.addEventListener('click', () => {
     const el = item.parentElement.parentElement;
@@ -137,15 +142,15 @@ function playMode() {
       if (item === wordCards[positive].firstElementChild) {
         item.classList.add('chosen-card');
         positive += 1;
-        const goodAnswer = new Audio('../src/assets/sounds/good.mp3');
+        const goodAnswer = new Audio('assets/sounds/good.mp3');
         goodAnswer.play();
-        document.querySelector('.rating').append(create('div', 'star', create('img', 'star__image', null, null, ['src', '../src/assets/images/good-star.svg'])));
+        document.querySelector('.rating').append(create('div', 'star', create('img', 'star__image', null, null, ['src', 'assets/images/good-star.svg'])));
         if (positive < 8) setTimeout(() => { wordCards[positive].lastElementChild.play(); }, 300);
         else gameResultsPage(mistakes);
       } else if (!item.classList.contains('chosen-card')) {
-        const badAnswer = new Audio('../src/assets/sounds/bad.mp3');
+        const badAnswer = new Audio('assets/sounds/bad.mp3');
         badAnswer.play();
-        document.querySelector('.rating').append(create('div', 'star', create('img', 'star__image', null, null, ['src', '../src/assets/images/bad-star.svg'])));
+        document.querySelector('.rating').append(create('div', 'star', create('img', 'star__image', null, null, ['src', 'assets/images/bad-star.svg'])));
         mistakes += 1;
       }
     }
@@ -171,13 +176,13 @@ function gameResultsPage(number) {
     let text;
     let audio;
     if (number === 0) {
-      audio = new Audio('../src/assets/sounds/win.mp3');
+      audio = new Audio('assets/sounds/win.mp3');
       text = create('p', 'text_win', 'Congratulations! You win!');
-      image = create('div', 'result', create('img', 'result_win', null, null, ['src', '../src/assets/images/happy.svg']));
+      image = create('div', 'result', create('img', 'result_win', null, null, ['src', 'assets/images/happy.svg']));
     } else {
-      audio = new Audio('../src/assets/sounds/lose.mp3');
+      audio = new Audio('assets/sounds/lose.mp3');
       text = create('p', 'text_lose', `You have ${number} mistakes :(`);
-      image = create('div', 'result', create('img', 'result_lose', null, null, ['src', '../src/assets/images/angry.svg']));
+      image = create('div', 'result', create('img', 'result_lose', null, null, ['src', 'assets/images/angry.svg']));
     }
     audio.play();
     create('section', 'mistakes', [text, image], document.querySelector('main'));
@@ -187,3 +192,62 @@ function gameResultsPage(number) {
     }, 3000);
   }, 1000);
 }
+
+
+function statisticsPage() {
+document.querySelector('main').innerHTML = '';
+  const cardsArray = [];
+  list.topics.forEach((item) => {
+    const card = create('div', 'topic-card', [
+      create('div', 'topic-card__image-block', create('img', 'topic-card__image-block__image', null, null, ['src', item.image])),
+      create('p', 'topic-card__name', item.name),
+    ]);
+    cardsArray.push(card);
+  });
+  create('section', 'main-page', cardsArray, document.querySelector('main'));
+  if (!isTrain) changeModeForMain();
+  topicCard();
+}
+
+function createLocal () {
+  let bigObj={};
+  list.topics.forEach((topic, index) => {
+    let array = [];
+    list.cards[index].forEach((card) => {
+      let obj={};
+      obj.name = card.name;
+      obj.translation = card.translation;
+      obj.train = 0;
+      obj.true = 0;
+      obj.false = 0;
+      array.push(obj);
+    })
+    bigObj[topic.name] = array;
+  })
+  localStorage.setItem('english', JSON.stringify(bigObj))
+}
+
+localTrain()
+
+function localTrain (name,train) {
+  let arr = JSON.parse(localStorage.getItem('english'))
+  // for(let i=0;i<arr.length;i++){
+  //   if(arr[i].name === name) console.log(arr[i].train);
+  // }
+  console.log(arr)
+
+}
+  // console.log(localStorage)
+  // console.log(JSON.parse(localStorage.getItem('Animals')))
+  // list.topics.forEach((topic, index) => {
+  //   let array = [];
+  //   list.cards[index].forEach((card) => {
+  //     let obj = {};
+  //     obj.name = card.name;
+  //     array.push(obj);
+  //   })
+  //   localStorage.setItem(topic.name, array);
+  // });
+  // console.log(localStorage)
+  // for(let key in localStorage)
+  // console.log(key);
