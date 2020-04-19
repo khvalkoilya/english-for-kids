@@ -200,22 +200,23 @@ function gameResultsPage(number) {
   }, 1000);
 }
 
-
-function statisticsPage() {
-  document.querySelector('main').innerHTML = '';
-  const hugeArray= [];
-  let obj = JSON.parse(localStorage.getItem('english'));
-  for(let key in obj){
-    const topicArray = [];
-    obj[key].forEach((item) => {
-      const smallArray=[];
-      let percent = Math.round(item.false*100/(item.true+item.false) * 100) / 100 ;
-      if(isNaN(percent)) percent = 0;
-      smallArray.push(key, item.name, item.translation, item.click, item.spin, item.true, item.false, percent)
-      topicArray.push(smallArray);
-    })
-    hugeArray.push(topicArray);
+let isWord = true;
+let isDigit = false;
+function statisticsPage(hugeArray, previous) {
+  if(!hugeArray) {
+    var hugeArray = [];
+    let obj = JSON.parse(localStorage.getItem('english'));
+    for(let key in obj){
+      obj[key].forEach((item) => {
+        const smallArray=[];
+        let percent = Math.round(item.false*100/(item.true+item.false) * 100) / 100 ;
+        if(isNaN(percent)) percent = 0;
+        smallArray.push(key, item.name, item.translation, item.click, item.spin, item.true, item.false, percent)
+        hugeArray.push(smallArray);
+      })
+    }
   }
+  document.querySelector('main').innerHTML = '';
   document.querySelector('.checkbox__text').classList.add('none');
   const name = create('p', 'name', 'Statistics');
   const reset = create('div', 'reset', 'Reset');
@@ -227,14 +228,67 @@ function statisticsPage() {
     createLocal();
     statisticsPage();
   })
+  console.log(hugeArray)
+  document.querySelector('tr').addEventListener('click', (e) => {
+    if(e.target.tagName==='TH') {
+      if (e.target.innerHTML.match(/Topic|Word|Translation/)){
+        if (e.target.innerHTML === previous) {
+          isWord=(!isWord)
+        }
+        else {
+          isWord = false;
+        }
+        statisticsSort(hugeArray, e.target.innerHTML,isWord)
+      }
+      else {
+        if (e.target.innerHTML === previous) {
+          isDigit=(!isDigit)
+        }
+        else {
+          isDigit = true;
+        }
+        statisticsSort(hugeArray, e.target.innerHTML,isDigit)
+      }
+    }
+  })
 }
 
+function statisticsSort(arr, name, rever) {
+  let p;
+  if(name === 'Topic') p = 0;
+  else if (name === 'Word') p = 1;
+  else if (name === 'Translation') p = 2;
+  else if (name === 'Click') p = 3;
+  else if (name === 'Spin') p = 4;
+  else if (name === 'True') p = 5;
+  else if (name === 'False') p = 6;
+  else p = 7;
+  for (let i = 0; i< arr.length - 1; i++) {
+    for (let j = 0; j< arr.length - 1 - i; j++) {
+        if (arr[j][p] > arr[j + 1][p]) {
+            let swap = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = swap;
+        }
+    }
+  } 
+  if(rever) arr = arr.reverse();
+  statisticsPage(arr, name)
+}
+
+
 function createTable(hugeArray, table) {
-  hugeArray.forEach((topic) => {
-    topic.forEach((item) => {
-      const row = create('tr',null,[create('td',null,item[0]),create('td',null,item[1]),create('td',null,item[2]),create('td',null,String(item[3])),create('td',null,String(item[4])),create('td',null,String(item[5])),create('td',null,String(item[6])),create('td',null,String(item[7]))], table)
-    })
+  hugeArray.forEach(item => {
+    const row = create('tr',null,[create('td',null,item[0]),create('td',null,item[1]),create('td',null,item[2]),create('td',null,String(item[3])),create('td',null,String(item[4])),create('td',null,String(item[5])),create('td',null,String(item[6])),create('td',null,String(item[7]))], table)
   })
+  // for(let item = 1; item <= hugeArray.length/8; item++) {
+  //   const row = create('tr',null,[create('td',null,hugeArray[8*item-8]),create('td',null,hugeArray[8*item-7]),create('td',null,hugeArray[8*item-6]),create('td',null,String(hugeArray[8*item-5])),create('td',null,String(hugeArray[8*item-4])),create('td',null,String(hugeArray[8*item-3])),create('td',null,String(hugeArray[8*item-2])),create('td',null,String(hugeArray[8*item-1]))], table)
+  // }
+  // hugeArray.forEach((topic) => {
+  //   topic.forEach((item) => {
+  //     const row = create('tr',null,[create('td',null,item[0]),create('td',null,item[1]),create('td',null,item[2]),create('td',null,String(item[3])),create('td',null,String(item[4])),create('td',null,String(item[5])),create('td',null,String(item[6])),create('td',null,String(item[7]))], table)
+  //   })
+  // })
   return table;
 }
 

@@ -456,6 +456,10 @@ body {
     margin-top: 15px;
     cursor: pointer;
     width: 40%;
+    transition: 0.2s;
+    &:hover {
+        transform: scale(1.02);
+    }
 }
 
 .statistics-table {
@@ -464,7 +468,7 @@ body {
     font-size: 1rem;
     table-layout: fixed;
     overflow: auto;
-    background-color: #dbdbdb;
+    background-color: #dfffd2;
 }
 
 th, td {
@@ -504,9 +508,9 @@ td {
 
 tr th:hover {
     cursor: pointer;
-    background-color: #bebebe;
+    background-color: #a4b495;
 }
 
 tr {
-    border: 1px solid #525252;
+    border: 1px solid #c0c0c0;
 }
