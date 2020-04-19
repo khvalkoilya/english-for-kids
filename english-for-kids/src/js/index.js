@@ -4,7 +4,6 @@
 import list from './layouts/list.js';
 import create from './utils/create.js';
 import WordCards from './utils/wordCard.js';
-
 const checkbox = document.querySelector('.checkbox__input');
 const checkboxText = document.querySelector('.checkbox__text');
 let isTrain = true;
@@ -104,6 +103,9 @@ function topicPageBlock(position) {
   document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', (e) => {
     if (e.target.className !== 'word-card__refresh' && isTrain) {
       item.parentElement.lastElementChild.play();
+    }
+    if(isTrain) {
+      localChanges(list.topics[position].name, item.childNodes[1].innerHTML, 'train', 1);
     }
   }));
   if (!isTrain) {
@@ -227,27 +229,10 @@ function createLocal () {
   localStorage.setItem('english', JSON.stringify(bigObj))
 }
 
-localTrain()
-
-function localTrain (name,train) {
-  let arr = JSON.parse(localStorage.getItem('english'))
-  // for(let i=0;i<arr.length;i++){
-  //   if(arr[i].name === name) console.log(arr[i].train);
-  // }
-  console.log(arr)
-
+function localChanges (topic, card, section, value) {
+  let obj = JSON.parse(localStorage.getItem('english'))
+  let elem = obj[topic].find(item=>item.name === card)
+  elem[section]+=value;
+  localStorage.setItem('english', JSON.stringify(obj))
+  console.log(obj[topic])
 }
-  // console.log(localStorage)
-  // console.log(JSON.parse(localStorage.getItem('Animals')))
-  // list.topics.forEach((topic, index) => {
-  //   let array = [];
-  //   list.cards[index].forEach((card) => {
-  //     let obj = {};
-  //     obj.name = card.name;
-  //     array.push(obj);
-  //   })
-  //   localStorage.setItem(topic.name, array);
-  // });
-  // console.log(localStorage)
-  // for(let key in localStorage)
-  // console.log(key);
