@@ -7,6 +7,7 @@ import WordCards from './utils/wordCard.js';
 const checkbox = document.querySelector('.checkbox__input');
 const checkboxText = document.querySelector('.checkbox__text');
 let isTrain = true;
+// localStorage.clear();
 const stata = localStorage['english'] || createLocal();
 let currentPage = 'Main Page';
 mainPageBlock();
@@ -47,6 +48,7 @@ document.querySelector('body').addEventListener('click', (e) => {
 document.querySelectorAll('.link').forEach((elem) => elem.addEventListener('click', () => changeActiveLink(elem)));
 
 function changeActiveLink(elem) {
+  document.querySelector('.checkbox__text').classList.remove('none');
   document.querySelectorAll('.link').forEach((e) => e.classList.remove('link_active'));
   elem.classList.add('link_active');
   sideMenu();
@@ -103,9 +105,10 @@ function topicPageBlock(position) {
   document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', (e) => {
     if (e.target.className !== 'word-card__refresh' && isTrain) {
       item.parentElement.lastElementChild.play();
+      localChanges(list.topics[position].name, item.childNodes[1].innerHTML, 'click', 1);
     }
-    if(isTrain) {
-      localChanges(list.topics[position].name, item.childNodes[1].innerHTML, 'train', 1);
+    else if(isTrain) {
+      localChanges(list.topics[position].name, item.childNodes[1].innerHTML, 'spin', 1);
     }
   }));
   if (!isTrain) {
@@ -147,6 +150,7 @@ function playMode() {
         const goodAnswer = new Audio('assets/sounds/good.mp3');
         goodAnswer.play();
         document.querySelector('.rating').append(create('div', 'star', create('img', 'star__image', null, null, ['src', 'assets/images/good-star.svg'])));
+        localChanges(currentPage, item.childNodes[1].innerHTML, 'true', 1);
         if (positive < 8) setTimeout(() => { wordCards[positive].lastElementChild.play(); }, 300);
         else gameResultsPage(mistakes);
       } else if (!item.classList.contains('chosen-card')) {
@@ -154,6 +158,7 @@ function playMode() {
         badAnswer.play();
         document.querySelector('.rating').append(create('div', 'star', create('img', 'star__image', null, null, ['src', 'assets/images/bad-star.svg'])));
         mistakes += 1;
+        localChanges(currentPage, wordCards[positive].firstElementChild.childNodes[1].innerHTML, 'false', 1);
       }
     }
   }
@@ -197,18 +202,40 @@ function gameResultsPage(number) {
 
 
 function statisticsPage() {
-document.querySelector('main').innerHTML = '';
-  const cardsArray = [];
-  list.topics.forEach((item) => {
-    const card = create('div', 'topic-card', [
-      create('div', 'topic-card__image-block', create('img', 'topic-card__image-block__image', null, null, ['src', item.image])),
-      create('p', 'topic-card__name', item.name),
-    ]);
-    cardsArray.push(card);
-  });
-  create('section', 'main-page', cardsArray, document.querySelector('main'));
-  if (!isTrain) changeModeForMain();
-  topicCard();
+  document.querySelector('main').innerHTML = '';
+  const hugeArray= [];
+  let obj = JSON.parse(localStorage.getItem('english'));
+  for(let key in obj){
+    const topicArray = [];
+    obj[key].forEach((item) => {
+      const smallArray=[];
+      let percent = Math.round(item.false*100/(item.true+item.false) * 100) / 100 ;
+      if(isNaN(percent)) percent = 0;
+      smallArray.push(key, item.name, item.translation, item.click, item.spin, item.true, item.false, percent)
+      topicArray.push(smallArray);
+    })
+    hugeArray.push(topicArray);
+  }
+  document.querySelector('.checkbox__text').classList.add('none');
+  const name = create('p', 'name', 'Statistics');
+  const reset = create('div', 'reset', 'Reset');
+  let table = create('table','statistics-table',create('tr',null,[create('th',null,'Topic'),create('th',null,'Word'),create('th',null,'Translation'),create('th',null,'Click'),create('th',null,'Spin'),create('th',null,'True'),create('th',null,'False'),create('th',null,'Percent')]))
+  table = createTable(hugeArray, table);
+  create('section', 'statistics', [name, reset, table], document.querySelector('main'));
+  document.querySelector('.reset').addEventListener('click', () => {
+    localStorage.clear();
+    createLocal();
+    statisticsPage();
+  })
+}
+
+function createTable(hugeArray, table) {
+  hugeArray.forEach((topic) => {
+    topic.forEach((item) => {
+      const row = create('tr',null,[create('td',null,item[0]),create('td',null,item[1]),create('td',null,item[2]),create('td',null,String(item[3])),create('td',null,String(item[4])),create('td',null,String(item[5])),create('td',null,String(item[6])),create('td',null,String(item[7]))], table)
+    })
+  })
+  return table;
 }
 
 function createLocal () {
@@ -219,7 +246,8 @@ function createLocal () {
       let obj={};
       obj.name = card.name;
       obj.translation = card.translation;
-      obj.train = 0;
+      obj.click = 0;
+      obj.spin = 0;
       obj.true = 0;
       obj.false = 0;
       array.push(obj);

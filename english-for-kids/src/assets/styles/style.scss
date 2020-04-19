@@ -20,7 +20,7 @@ body {
     justify-content: space-between;
 }
 
-.header, .rating, .buttons {
+.header, .rating, .buttons{
     max-width: 1400px;
     @media (max-width: 1399px) {
         max-width: 1040px;
@@ -113,14 +113,14 @@ body {
     &.train:before {
         content: 'TRAIN';
         padding-left: 38px;
-        padding-top: 3px;
+        padding-top: 5px;
         box-sizing: border-box;
     }
     
     &.play:before {
         content: 'PLAY';
         padding-left: 14px;
-        padding-top: 3px;
+        padding-top: 5px;
         box-sizing: border-box;
     }
 }
@@ -356,10 +356,10 @@ body {
     transition: 0.3s;
     &__start {
         text-align: center;
-        padding-top: 18px;
+        padding-top: 20px;
         color: #E4DBBF;
         @media (max-width: 360px) {
-            padding-top: 4px;
+            padding-top: 7px;
         }
     }
     &:hover {
@@ -400,7 +400,7 @@ body {
     }
 }
 
-.text_win, .text_lose {
+.text_win, .text_lose, .name, .reset {
     margin: 0 auto;
     font-size: 4rem;
     font-weight: 700;
@@ -434,4 +434,79 @@ body {
     @media (max-width: 736px) {
         width: 200px;
     }
+}
+
+.name {
+    color: #525252;
+    padding-top: 5vh;
+}
+
+.reset {
+    margin: 0 auto;
+    line-height: 60px;
+    padding-top: 10px;
+    font-weight: 700;
+    text-align: center;
+    height: 60px;
+    background-color: #959b74;
+    color: #4c4852;
+    border: 2px solid #525252;
+    border-radius: 30px;
+    padding-top: 0;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 40%;
+}
+
+.statistics-table {
+    margin: 20px auto;
+    border: 2px solid #525252;
+    font-size: 1rem;
+    table-layout: fixed;
+    overflow: auto;
+    background-color: #dbdbdb;
+}
+
+th, td {
+    padding: 4px 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    width: 92px;
+    text-align: center;
+    white-space: nowrap;
+    @media (max-width: 800px) {
+        font-size: 1.1rem;
+        width: 70px;
+    }
+    @media (max-width: 640px) {
+        font-size: 1rem;
+        width: 50px;
+    }
+    @media (max-width: 490px) {
+        font-size: 0.9rem;
+        width: 32px;
+    }
+}
+
+td {
+    font-size: 1.05rem;
+    font-weight: 400;
+    @media (max-width: 800px) {
+        font-size: 1rem;
+    }
+    @media (max-width: 640px) {
+        font-size: 0.9rem;
+    }
+    @media (max-width: 490px) {
+        font-size: 0.7rem
+    }
+}
+
+tr th:hover {
+    cursor: pointer;
+    background-color: #bebebe;
+}
+
+tr {
+    border: 1px solid #525252;
 }

@@ -435,13 +435,13 @@ body {
 
 .buttons__start {
   text-align: center;
-  padding-top: 18px;
+  padding-top: 20px;
   color: #E4DBBF;
 }
 
 @media (max-width: 360px) {
   .buttons__start {
-    padding-top: 4px;
+    padding-top: 7px;
   }
 }
 
@@ -489,7 +489,7 @@ body {
   }
 }
 
-.text_win, .text_lose {
+.text_win, .text_lose, .name, .reset {
   margin: 0 auto;
   font-size: 4rem;
   font-weight: 700;
@@ -499,19 +499,19 @@ body {
 }
 
 @media (max-width: 1100px) {
-  .text_win, .text_lose {
+  .text_win, .text_lose, .name, .reset {
     font-size: 3.8rem;
   }
 }
 
 @media (max-width: 736px) {
-  .text_win, .text_lose {
+  .text_win, .text_lose, .name, .reset {
     font-size: 2.7rem;
   }
 }
 
 @media (max-width: 360px) {
-  .text_win, .text_lose {
+  .text_win, .text_lose, .name, .reset {
     font-size: 2rem;
   }
 }
@@ -535,5 +535,98 @@ body {
   .result {
     width: 200px;
   }
+}
+
+.name {
+  color: #525252;
+  padding-top: 5vh;
+}
+
+.reset {
+  margin: 0 auto;
+  line-height: 60px;
+  padding-top: 10px;
+  font-weight: 700;
+  text-align: center;
+  height: 60px;
+  background-color: #959b74;
+  color: #4c4852;
+  border: 2px solid #525252;
+  border-radius: 30px;
+  padding-top: 0;
+  margin-top: 15px;
+  cursor: pointer;
+  width: 40%;
+}
+
+.statistics-table {
+  margin: 20px auto;
+  border: 2px solid #525252;
+  font-size: 1rem;
+  table-layout: fixed;
+  overflow: auto;
+  background-color: #dbdbdb;
+}
+
+th, td {
+  padding: 4px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  width: 92px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  th, td {
+    font-size: 1.1rem;
+    width: 70px;
+  }
+}
+
+@media (max-width: 640px) {
+  th, td {
+    font-size: 1rem;
+    width: 50px;
+  }
+}
+
+@media (max-width: 490px) {
+  th, td {
+    font-size: 0.9rem;
+    width: 32px;
+  }
+}
+
+td {
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+@media (max-width: 800px) {
+  td {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  td {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 490px) {
+  td {
+    font-size: 0.7rem;
+  }
+}
+
+tr th:hover {
+  cursor: pointer;
+  background-color: #bebebe;
+}
+
+tr {
+  border: 1px solid #525252;
 }
 /*# sourceMappingURL=style.css.map */
