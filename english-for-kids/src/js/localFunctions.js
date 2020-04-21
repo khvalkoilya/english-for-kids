@@ -1,5 +1,5 @@
-import * as local from './local.js'
-import list from './layouts/list.js'
+import * as local from './local.js';
+import list from './layouts/list.js';
 
 export function createLocal() {
   const bigObj = {};
@@ -22,8 +22,8 @@ export function createLocal() {
 }
 
 export function localChanges(topic, card, section, value) {
-    const obj = local.get('english');
-    const elem = obj[topic].find((item) => item.name === card);
-    elem[section] += value;
-    local.set('english', obj);
-  }
+  const obj = local.get('english');
+  const elem = obj[topic].find((item) => item.name === card);
+  elem[section] += value;
+  local.set('english', obj);
+}
