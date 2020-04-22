@@ -251,8 +251,8 @@ body {
 }
 
 .word-card__container {
-  -webkit-perspective: 500px;
-          perspective: 500px;
+  -webkit-perspective: 550px;
+          perspective: 550px;
 }
 
 .word-card {

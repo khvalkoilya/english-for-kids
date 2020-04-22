@@ -2,6 +2,7 @@ import * as local from './local.js';
 import create from './utils/create.js';
 import vars from './variables.js';
 import * as localFunctions from './localFunctions.js';
+import * as topic from './topic.js';
 
 function statisticsPage(hugeArray, previous) {
   document.querySelector('main').innerHTML = '';
@@ -17,7 +18,7 @@ function statisticsPage(hugeArray, previous) {
     localFunctions.createLocal();
     createHugeArray();
   });
-  document.querySelector('.repeat-word').addEventListener('click', () => createBaseForReseat(hugeArray));
+  document.querySelector('.repeat-word').addEventListener('click', () => createBaseForRepeat(hugeArray));
   document.querySelector('tr').addEventListener('click', (e) => {
     if (e.target.tagName === 'TH') {
       if (e.target.innerHTML.match(/Topic|Word|Translation/)) {
@@ -87,7 +88,7 @@ export default function createHugeArray() {
       percent = Math.round(percent * 100) / 100;
       if (Number.isNaN(percent)) percent = 0;
       smallArray.push(key, item.name, item.translation, item.click);
-      smallArray.push(item.spin, item.true, item.false, percent, item.audio);
+      smallArray.push(item.spin, item.true, item.false, percent, item.audio, item.image);
       hugeArray.push(smallArray);
     });
   });
@@ -95,15 +96,24 @@ export default function createHugeArray() {
 }
 
 
-function createBaseForReseat(arr) {
+function createBaseForRepeat(arr) {
   statisticsSort(arr, 'Percent', true, true);
 }
 
-function repeatWordsPage() {
-  document.querySelector('main').innerHTML = '';
-  // array = array.slice(0, 8);
-  // alert('Почти успел(');
-//   vars.currentPage = 'Main Page';
-//   mainPageBlock();
-  // create('section', 'topic-page__table', , document.querySelector('main'));
+function repeatWordsPage(arr) {
+  const array = arr.slice(0, 8);
+  const newArray = [];
+  array.forEach((item) => {
+    if (item[7] !== 0) {
+      const obj = {
+        topic: item[0],
+        name: item[1],
+        translation: item[2],
+        audio: item[8],
+        image: item[9],
+      };
+      newArray.push(obj);
+    }
+  });
+  topic.topicPageBlock(null, newArray);
 }

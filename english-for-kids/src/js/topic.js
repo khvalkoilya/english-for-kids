@@ -22,9 +22,9 @@ export function findPositionOfTopic(item) {
   topicPageBlock(positionOfTopic);
 }
 
-function topicPageBlock(position) {
+export function topicPageBlock(position, topicObj = list.cards[position]) {
   document.querySelector('main').innerHTML = '';
-  const objOfCards = new WordCards(list.cards[position]);
+  const objOfCards = new WordCards(topicObj);
   const arrayOfCards = objOfCards.createWordCard();
   const page = create('section', 'topic-page', [create('div', 'rating none'), create('div', 'topic-page__table', arrayOfCards), create('div', 'buttons none', create('p', 'buttons__start', 'Start game!'))]);
   document.querySelector('main').append(page);
@@ -34,14 +34,25 @@ function topicPageBlock(position) {
     el.addEventListener('mouseleave', () => el.classList.remove('rotate'));
   }));
   document.querySelectorAll('.word-card_front').forEach((item) => item.addEventListener('click', (e) => {
-    if (e.target.className !== 'word-card__refresh' && vars.isTrain) {
+    let topic;
+    const child = item.childNodes[1].innerHTML;
+    if (typeof position === 'number') {
+      topic = list.topics[position].name;
+    } else {
+      topicObj.forEach((elem) => {
+        if (elem.name === child) {
+          topic = elem.topic;
+        }
+      });
+    }
+    if ((e.target.className !== 'word-card__refresh' && vars.isTrain) || (e.target.className !== 'word-card__refresh' && typeof position !== 'number')) {
       item.parentElement.lastElementChild.play();
-      localFunctions.localChanges(list.topics[position].name, item.childNodes[1].innerHTML, 'click', 1);
+      localFunctions.localChanges(topic, child, 'click', 1);
     } else if (vars.isTrain) {
-      localFunctions.localChanges(list.topics[position].name, item.childNodes[1].innerHTML, 'spin', 1);
+      localFunctions.localChanges(topic, child, 'spin', 1);
     }
   }));
-  if (!vars.isTrain) {
+  if (!vars.isTrain && typeof position === 'number') {
     changeModeForTopic();
   }
 }

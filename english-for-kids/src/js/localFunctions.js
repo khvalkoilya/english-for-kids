@@ -14,6 +14,7 @@ export function createLocal() {
       obj.true = 0;
       obj.false = 0;
       obj.audio = card.audio;
+      obj.image = card.image;
       array.push(obj);
     });
     bigObj[topic.name] = array;

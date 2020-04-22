@@ -14,8 +14,11 @@ export function changeMode() {
     vars.checkboxText.classList.add('train');
     vars.sideMenu.classList.remove('side-menu_play');
   }
-  if (vars.currentPage === 'Main Page') main.changeModeForMain();
-  else topic.changeModeForTopic();
+  if (vars.currentPage === 'Main Page') {
+    main.changeModeForMain();
+  } else {
+    topic.changeModeForTopic();
+  }
 }
 
 
