@@ -1,3 +1,5 @@
+import * as localFunctions from './localFunctions.js';
+
 export function set(name, value) {
   window.localStorage.setItem(name, JSON.stringify(value));
 }
