@@ -166,7 +166,7 @@ body {
 .side-menu {
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  position: absolute;
+  position: fixed;
   top: 0;
   z-index: 2;
   height: 100vh;

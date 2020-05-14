@@ -19,6 +19,8 @@ export function mainPageBlock() {
     cardsArray.push(card);
   });
   create('section', 'main-page', cardsArray, document.querySelector('main'));
-  if (!vars.isTrain) changeModeForMain();
+  if (!vars.isTrain) {
+    changeModeForMain();
+  }
   topic.topicCard();
 }

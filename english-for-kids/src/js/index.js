@@ -1,5 +1,5 @@
-// import '../assets/styles/reset.css';
-// import '../assets/styles/style.css';
+import '../assets/styles/reset.css';
+import '../assets/styles/style.css';
 
 import vars from './variables.js';
 import * as header from './header.js';

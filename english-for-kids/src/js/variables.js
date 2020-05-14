@@ -7,4 +7,6 @@ export default {
   currentPage: 'Main Page',
   isWord: true,
   isDigit: false,
+  positive: 0,
+  mistakes: 0,
 };

@@ -6,15 +6,13 @@ export function createLocal() {
   list.topics.forEach((topic, index) => {
     const array = [];
     list.cards[index].forEach((card) => {
-      const obj = {};
-      obj.name = card.name;
-      obj.translation = card.translation;
-      obj.click = 0;
-      obj.spin = 0;
-      obj.true = 0;
-      obj.false = 0;
-      obj.audio = card.audio;
-      obj.image = card.image;
+      const obj = {
+        ...card,
+        click: 0,
+        spin: 0,
+        true: 0,
+        false: 0,
+      };
       array.push(obj);
     });
     bigObj[topic.name] = array;

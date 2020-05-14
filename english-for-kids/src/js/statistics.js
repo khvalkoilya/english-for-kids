@@ -3,6 +3,33 @@ import create from './utils/create.js';
 import vars from './variables.js';
 import * as localFunctions from './localFunctions.js';
 import * as topic from './topic.js';
+import getPercent from './utils/getPercent.js';
+
+function eventResetState() {
+  local.del('english');
+  localFunctions.createLocal();
+  createHugeArray();
+}
+
+function eventPreparingForSort(e, previous, hugeArray) {
+  if (e.target.tagName === 'TH') {
+    if (e.target.innerHTML.match(/Topic|Word|Translation/)) {
+      if (e.target.innerHTML === previous) {
+        vars.isWord = (!vars.isWord);
+      } else {
+        vars.isWord = false;
+      }
+      statisticsSort(hugeArray, e.target.innerHTML, vars.isWord);
+    } else {
+      if (e.target.innerHTML === previous) {
+        vars.isDigit = (!vars.isDigit);
+      } else {
+        vars.isDigit = true;
+      }
+      statisticsSort(hugeArray, e.target.innerHTML, vars.isDigit);
+    }
+  }
+}
 
 function statisticsPage(hugeArray, previous) {
   document.querySelector('main').innerHTML = '';
@@ -13,44 +40,13 @@ function statisticsPage(hugeArray, previous) {
   let table = create('table', 'statistics-table', create('tr', null, [create('th', null, 'Topic'), create('th', null, 'Word'), create('th', null, 'Translation'), create('th', null, 'Click'), create('th', null, 'Spin'), create('th', null, 'True'), create('th', null, 'False'), create('th', null, 'Percent')]));
   table = createTable(hugeArray, table);
   create('section', 'statistics', [name, reset, repeatWord, table], document.querySelector('main'));
-  document.querySelector('.reset').addEventListener('click', () => {
-    local.del('english');
-    localFunctions.createLocal();
-    createHugeArray();
-  });
+  document.querySelector('.reset').addEventListener('click', () => eventResetState());
   document.querySelector('.repeat-word').addEventListener('click', () => createBaseForRepeat(hugeArray));
-  document.querySelector('tr').addEventListener('click', (e) => {
-    if (e.target.tagName === 'TH') {
-      if (e.target.innerHTML.match(/Topic|Word|Translation/)) {
-        if (e.target.innerHTML === previous) {
-          vars.isWord = (!vars.isWord);
-        } else {
-          vars.isWord = false;
-        }
-        statisticsSort(hugeArray, e.target.innerHTML, vars.isWord);
-      } else {
-        if (e.target.innerHTML === previous) {
-          vars.isDigit = (!vars.isDigit);
-        } else {
-          vars.isDigit = true;
-        }
-        statisticsSort(hugeArray, e.target.innerHTML, vars.isDigit);
-      }
-    }
-  });
+  document.querySelector('tr').addEventListener('click', (e) => eventPreparingForSort(e, previous, hugeArray));
 }
 
-function statisticsSort(array, name, rever, repeat) {
-  let arr = array;
-  let p;
-  if (name === 'Topic') p = 0;
-  else if (name === 'Word') p = 1;
-  else if (name === 'Translation') p = 2;
-  else if (name === 'Click') p = 3;
-  else if (name === 'Spin') p = 4;
-  else if (name === 'True') p = 5;
-  else if (name === 'False') p = 6;
-  else p = 7;
+function sorting(array, p) {
+  const arr = array;
   for (let i = 0; i < arr.length - 1; i += 1) {
     for (let j = 0; j < arr.length - 1 - i; j += 1) {
       if (arr[j][p] > arr[j + 1][p]) {
@@ -60,9 +56,30 @@ function statisticsSort(array, name, rever, repeat) {
       }
     }
   }
-  if (rever) arr = arr.reverse();
-  if (!repeat) statisticsPage(arr, name);
-  else repeatWordsPage(arr);
+}
+
+function statisticsSort(array, name, rever, repeat) {
+  let arr = array;
+  let p;
+  switch (name) {
+    case 'Topic': p = 0; break;
+    case 'Word': p = 1; break;
+    case 'Translation': p = 2; break;
+    case 'Click': p = 3; break;
+    case 'Spin': p = 4; break;
+    case 'True': p = 5; break;
+    case 'False': p = 6; break;
+    default: p = 7;
+  }
+  sorting(arr, p);
+  if (rever) {
+    arr = arr.reverse();
+  }
+  if (!repeat) {
+    statisticsPage(arr, name);
+  } else {
+    repeatWordsPage(arr);
+  }
 }
 
 
@@ -83,10 +100,7 @@ export default function createHugeArray() {
   Object.keys(obj).forEach((key) => {
     obj[key].forEach((item) => {
       const smallArray = [];
-      let percent = item.false / (item.true + item.false);
-      percent *= 100;
-      percent = Math.round(percent * 100) / 100;
-      if (Number.isNaN(percent)) percent = 0;
+      const percent = getPercent(item);
       smallArray.push(key, item.name, item.translation, item.click);
       smallArray.push(item.spin, item.true, item.false, percent, item.audio, item.image);
       hugeArray.push(smallArray);
